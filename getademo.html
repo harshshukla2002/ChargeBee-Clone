@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: #FFEBEE;
+        }
+
+        #home {
+            width: 50%;
+            text-align: right;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        #nav{
+            display: flex;
+            justify-content: space-evenly;
+            width: 40%;
+            align-items: center;
+        }
+
+        #demo {
+            display: flex;
+            justify-content: space-between;
+            margin: auto;
+            padding: 30px;
+            background-color: blue;
+            border-radius: 20px;
+            padding-top: 100px;
+            margin-top: 50px;
+        }
+
+        #demo-left {
+            width: 30%;
+            margin-left: 100px;
+            color: white;
+            font-size: 30px;
+        }
+
+        #demo-left>p {
+            font-size: 30px;
+        }
+
+        #demo-right {
+            width: 30%;
+            margin-right: 30px;
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+            background-color: white;
+            padding: 20px;
+            align-items: center;
+        }
+
+        #demo-right>form>input {
+            padding: 10px;
+            width: 400px;
+            border: none;
+            font-size: 18px;
+        }
+
+        #demo-right>form>input[type=submit] {
+            padding: 20px;
+            background-color: #AED581;
+            width: 430px;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #country {
+            padding: 15px;
+            border: none;
+            width: 300px;
+            font-size: 15px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            border: 1px solid teal;
+            border-radius: 10px;
+        }
+
+        #company{
+            display: flex;
+            justify-content: space-evenly;
+            width: 40%;
+            margin: auto;
+            margin-top: 30px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+
+        a{
+            text-decoration: none;
+            padding: 10px;
+            font-size: 30px;
+            background-color: #26A69A;
+            border-radius: 5px;
+            color: white;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+      <div id="nav">
+        <img src="https://i.postimg.cc/13YTtmtG/your.jpg" id="home" alt="YourCA">
+
+        <a href="login.html">Login</a>
+      </div>
+
+    <div id="demo">
+        <div id="demo-left">
+            <h1>Elevate Your Subscription Experience with YourCA</h1>
+            <p>
+                Get a demo that's customized around your unique subscription workflows and pain-points.
+            </p>
+        </div>
+
+        <div id="demo-right">
+            <form>
+                <input type="text" id="name" placeholder="Name" required> <br>
+                <hr>
+                <input type="email" id="email" placeholder="Business Email" required>
+                <hr> <br>
+                <input type="password" id="pass" placeholder="Create Password" required> <hr>
+                <select id="country" required>
+                    <option value="india">India</option>
+                    <option value="america">America</option>
+                    <option value="france">France</option>
+                    <option value="germany">Germany</option>
+                    <option value="newzealand">NewZealand</option>
+                </select>
+                <input type="number" id="phone" placeholder="Phone" required>
+                <hr>
+                <br>
+                <input type="text" id="website" placeholder="wesbite" required>
+                <hr> <br>
+                <label for="">What problem can YourCA solve for you?</label> <br> <br>
+                <input type="text" id="problem" required>
+                <hr> <br> <br>
+                <input type="submit" value="Register for demo">
+            </form>
+        </div>
+    </div>
+
+    <div id="company">
+        <img src="https://webstatic.chargebee.com/assets/web/535/images/schedule-a-demo/logos/okta.svg" alt="">
+        <img src="https://webstatic.chargebee.com/assets/web/535/images/schedule-a-demo/logos/calendly.svg" alt="">
+        <img src="https://webstatic.chargebee.com/assets/web/535/images/schedule-a-demo/logos/freshworks.svg" alt="">
+        <img src="https://webstatic.chargebee.com/assets/web/535/images/schedule-a-demo/logos/study-com.svg" alt="">
+        <img src="https://webstatic.chargebee.com/assets/web/535/images/schedule-a-demo/logos/doodle.svg" alt="">
+        <img src="https://webstatic.chargebee.com/assets/web/535/images/schedule-a-demo/logos/envoy.svg" alt="">
+    </div>
+</body>
+
+</html>
+
+<script>
+    let data = JSON.parse(localStorage.getItem("signup")) || []
+
+    document.querySelector("#home").addEventListener("click", function () {
+        window.location.href = "index.html"
+    })
+
+    document.querySelector("form").addEventListener("submit",store)
+
+    function store(event){
+        event.preventDefault();
+        let name =  document.querySelector("#name").value;
+        let email =  document.querySelector("#email").value;
+        let password =  document.querySelector("#pass").value;
+        let country =  document.querySelector("#country").value;
+        let phone =  document.querySelector("#phone").value;
+        let website =  document.querySelector("#website").value;
+        let problem =  document.querySelector("#website").value;
+
+        let obj = {
+            name,
+            email,
+            password,
+            country,
+            phone,
+            website,
+            problem
+        }
+        data.push(obj)
+        localStorage.setItem("signup",JSON.stringify(data));
+        window.location.reload();
+    }
+
+</script>
