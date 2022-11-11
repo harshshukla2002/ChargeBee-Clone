@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F9FBE7;
+        }
+
+        #nav>img {
+            width: 15%;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            font-size: 40px;
+        }
+
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 60%;
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        table td,
+        table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        table tr:hover {
+            background-color: #B2DFDB;
+        }
+
+        table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #E57373;
+            color: white;
+            text-align: center;
+        }
+
+        #change{
+            width: 30%;
+            margin: auto;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            background-color: white;
+            padding: 20px;
+            margin-top: 90px;
+            border-radius: 10px;
+        }
+
+        #change>h3{
+            font-size: 40px;
+            text-align: center;
+            color: teal;
+        }
+
+        #change>input{
+            font-size: 20px;
+            padding: 10px;
+            border:  none;
+        }
+
+        #change>button{
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 20px;
+            background-color: blue;
+        }
+
+        #change>select{
+            padding: 10px;
+            border: none;
+            border-radius: 50px;
+            background-color: #A5D6A7;
+            width: 90%;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <img src="https://i.postimg.cc/13YTtmtG/your.jpg" id="home" alt="">
+    </div>
+
+    <h1> User Details </h1>
+
+    <div id="user">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Country</th>
+                    <th>Mobile Number</th>
+                    <th>Website</th>
+                    <th>Problem</th>
+                    <th>Revoke Access</th>
+                </tr>
+            </thead>
+            <tbody id="usertbody">
+
+            </tbody>
+        </table>
+    </div>
+
+    <h1>Card Details</h1>
+
+    <div id="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Card Number</th>
+                    <th>Expiry Month</th>
+                    <th>Expiry year</th>
+                    <th>CVV Number</th>
+                </tr>
+            </thead>
+            <tbody id="admintbody">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    document.querySelector("#home").addEventListener("click", function () {
+        window.location.href = "home.html"
+    })
+
+    let userdata = JSON.parse(localStorage.getItem("signup")) || []
+
+    let carddata = JSON.parse(localStorage.getItem("carddetails")) || []
+
+    userdisplay(userdata)
+    carddisplay(carddata)
+
+    function userdisplay(userdata) {
+        document.querySelector("#usertbody").innerHTML = null;
+        userdata.forEach(function (ele, index) {
+            let row = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerText = ele.name;
+            let td2 = document.createElement("td");
+            td2.innerText = ele.email;
+            let td3 = document.createElement("td");
+            td3.innerText = ele.password;
+            let td4 = document.createElement("td");
+            td4.innerText = ele.country;
+            let td5 = document.createElement("td");
+            td5.innerText = ele.phone;
+            let td6 = document.createElement("td");
+            td6.innerText = ele.website;
+            let td7 = document.createElement("td");
+            td7.innerText = ele.problem;
+            let td8 = document.createElement("td");
+            td8.innerText = "Revoke"
+            td8.style.backgroundColor = "red"
+            td8.addEventListener("click", function () {
+                {
+                    Revoke(index, userdata)
+                }
+            })
+            row.append(td1, td2, td3, td4, td5, td6, td7, td8);
+            document.querySelector("#usertbody").append(row);
+        });
+    }
+
+    function Revoke(index, userdata) {
+        userdata.splice(index, 1);
+        localStorage.setItem("signup", JSON.stringify(userdata));
+        userdisplay(userdata)
+    }
+
+    function carddisplay(carddata) {
+        document.querySelector("#admintbody").innerHTML = null;
+        carddata.forEach(function (ele, index) {
+            let row = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerText = ele.name;
+            let td2 = document.createElement("td");
+            td2.innerText = ele.card;
+            let td3 = document.createElement("td");
+            td3.innerText = ele.month;
+            let td4 = document.createElement("td");
+            td4.innerText = ele.year;
+            let td5 = document.createElement("td");
+            td5.innerText = ele.cvv;
+            row.append(td1, td2, td3, td4, td5);
+            document.querySelector("#admintbody").append(row);
+        });
+    }
+
+</script>
