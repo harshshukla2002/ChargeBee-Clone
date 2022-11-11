@@ -211,6 +211,7 @@
             if (mail.value == ele.email && pass.value == ele.password) {
                 alert("Login Succesfull")
                 window.location.href = "home.html"
+                break;
             }
             else if (mail.value != ele.email) {
                 bag = "wrong Email";
@@ -224,7 +225,7 @@
         }
 
         if(bag != ""){
-            console.log(bag);
+            alert(bag)
         }
     }
 
