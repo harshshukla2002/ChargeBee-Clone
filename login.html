@@ -141,7 +141,7 @@
             text-align: center;
         }
 
-        #admin{
+        #admin {
             text-decoration: none;
             padding: 10px;
             font-size: 30px;
@@ -207,25 +207,19 @@
         let mail = document.querySelector("#mail")
         let pass = document.querySelector("#password")
 
+        let bag = ""
+
         for (let ele of data) {
             if (mail.value == ele.email && pass.value == ele.password) {
-                alert("Login Succesfull")
+                bag = "Login Succesfull"
                 window.location.href = "home.html"
-                break;
-            }
-            else if (mail.value != ele.email) {
-                bag = "wrong Email";
-            }
-            else if (pass.value != ele.password) {
-               bag = "Wrong Password"
-            }
-            else if (mail.value != ele.email && pass.value != ele.password) {
-                bag = "Wrong Credentials please signup first!"
             }
         }
-
         if(bag != ""){
             alert(bag)
+        }
+        else{
+            alert("wrong Email or password")
         }
     }
 
