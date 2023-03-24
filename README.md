@@ -1,5 +1,3 @@
-# exultant-fuel-3695
-
 <img src="https://i.postimg.cc/13YTtmtG/your.jpg" />
 
 <hr />
