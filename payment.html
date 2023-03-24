@@ -154,7 +154,7 @@
         let card = document.querySelector("#card").value
         let cvv = document.querySelector("#cvv").value
         paymentDetails()
-        if (card.length > 11) {
+        if (card.length == 12) {
             if (cvv.length == 3) {
                 otp = parseInt(1000 + Math.random() * 9000);
                 alert("Your otp is : " + otp)

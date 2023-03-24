@@ -135,6 +135,28 @@
                     <th>CVV Number</th>
                 </tr>
             </thead>
+            <tbody id="cardtbody">
+
+            </tbody>
+        </table>
+    </div>
+
+    <h1>Admins</h1>
+
+    <div id="admin">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Country</th>
+                    <th>Mobile Number</th>
+                    <th>Website</th>
+                    <th>Problem</th>
+                    <th>Revoke Access</th>
+                </tr>
+            </thead>
             <tbody id="admintbody">
 
             </tbody>
@@ -152,10 +174,13 @@
 
     let userdata = JSON.parse(localStorage.getItem("signup")) || []
 
+    let admindata = JSON.parse(localStorage.getItem("admin")) || []
+
     let carddata = JSON.parse(localStorage.getItem("carddetails")) || []
 
     userdisplay(userdata)
     carddisplay(carddata)
+    admindisplay(admindata)
 
     function userdisplay(userdata) {
         document.querySelector("#usertbody").innerHTML = null;
@@ -180,7 +205,7 @@
             td8.style.backgroundColor = "red"
             td8.addEventListener("click", function () {
                 {
-                    Revoke(index, userdata)
+                    Revoke1(index, userdata)
                 }
             })
             row.append(td1, td2, td3, td4, td5, td6, td7, td8);
@@ -188,14 +213,51 @@
         });
     }
 
-    function Revoke(index, userdata) {
+    function admindisplay(admindata) {
+        document.querySelector("#admintbody").innerHTML = null;
+        admindata.forEach(function (ele, index) {
+            let row = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerText = ele.name;
+            let td2 = document.createElement("td");
+            td2.innerText = ele.email;
+            let td3 = document.createElement("td");
+            td3.innerText = ele.password;
+            let td4 = document.createElement("td");
+            td4.innerText = ele.country;
+            let td5 = document.createElement("td");
+            td5.innerText = ele.phone;
+            let td6 = document.createElement("td");
+            td6.innerText = ele.website;
+            let td7 = document.createElement("td");
+            td7.innerText = ele.problem;
+            let td8 = document.createElement("td");
+            td8.innerText = "Revoke"
+            td8.style.backgroundColor = "red"
+            td8.addEventListener("click", function () {
+                {
+                    Revoke2(index, admindata)
+                }
+            })
+            row.append(td1, td2, td3, td4, td5, td6, td7, td8);
+            document.querySelector("#admintbody").append(row);
+        });
+    }
+
+    function Revoke1(index, userdata) {
         userdata.splice(index, 1);
         localStorage.setItem("signup", JSON.stringify(userdata));
         userdisplay(userdata)
     }
 
+    function Revoke2(index, admindata) {
+        admindata.splice(index, 1);
+        localStorage.setItem("admin", JSON.stringify(admindata));
+        admindisplay(admindata)
+    }
+
     function carddisplay(carddata) {
-        document.querySelector("#admintbody").innerHTML = null;
+        document.querySelector("#cardtbody").innerHTML = null;
         carddata.forEach(function (ele, index) {
             let row = document.createElement("tr");
             let td1 = document.createElement("td");
@@ -209,7 +271,7 @@
             let td5 = document.createElement("td");
             td5.innerText = ele.cvv;
             row.append(td1, td2, td3, td4, td5);
-            document.querySelector("#admintbody").append(row);
+            document.querySelector("#cardtbody").append(row);
         });
     }
 
